@@ -1,4 +1,4 @@
-class LayoutGenerator():
+class LayoutGenerator:
     @staticmethod
     def gen_header():
         """

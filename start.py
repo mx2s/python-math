@@ -1,6 +1,7 @@
 import tornado.ioloop
 import tornado.web
-from site.nav import IndexHandler
+
+from pages.index_handler import IndexHandler
 
 
 def make_tornado_app():
