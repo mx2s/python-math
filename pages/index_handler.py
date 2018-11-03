@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from abc import ABC
 import tornado.web
 
@@ -9,7 +7,9 @@ from modules.site.layout_generator import LayoutGenerator
 class IndexHandler(tornado.web.RequestHandler, ABC):
     def get(self):
         categories_list = [
-            {"name": "category", "uri": "/someStuff"}
+            {"name": "Geometry 1", "uri": "/geometry_1", "tasks":[
+                "degrees to radians converter"
+            ]}
         ]
 
         self.write(LayoutGenerator.gen_header())
@@ -17,5 +17,11 @@ class IndexHandler(tornado.web.RequestHandler, ABC):
         for category in categories_list:
             self.write('<li><a href="' + category["uri"] + '">')
             self.write(category["name"])
-            self.write('</a></li')
+            self.write('</a></li>')
+            self.write("<ul>")
+            self.write("<li><b>Tasks:</b></li>")
+            for task in category["tasks"]:
+                self.write("<li>" + task + "</li>")
+            self.write("</ul>")
+            self.write("<li>---</li>")
         self.write("</ul>")
