@@ -15,4 +15,4 @@ class LayoutGenerator:
         :param content:
         :return:
         """
-        return "<center><i><h2>" + str(content) + "</h2></i></center>"
+        return "<center><i><h3>" + str(content) + "</h3></i></center>"
