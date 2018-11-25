@@ -7,8 +7,9 @@ from modules.site.layout_generator import LayoutGenerator
 class IndexHandler(tornado.web.RequestHandler, ABC):
     def get(self):
         categories_list = [
-            {"name": "Geometry 1", "uri": "/geometry_1", "tasks":[
-                "degrees to radians converter"
+            {"name": "Geometry 1", "uri": "/geometry_1", "tasks": [
+                "degrees to radians converter",
+                "radians to degrees converter"
             ]}
         ]
 
@@ -19,7 +20,6 @@ class IndexHandler(tornado.web.RequestHandler, ABC):
             self.write(category["name"])
             self.write('</a></li>')
             self.write("<ul>")
-            self.write("<li><b>Tasks:</b></li>")
             for task in category["tasks"]:
                 self.write("<li>" + task + "</li>")
             self.write("</ul>")
