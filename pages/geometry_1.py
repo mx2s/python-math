@@ -2,11 +2,11 @@ from abc import ABC
 from random import randint
 import tornado.web
 
+from modules.volumes.volumes_module import VolumesModule
 from modules.areas.areas_module import AreasModule
 from modules.geometry.degrees_module import DegreesModule
 from modules.site.blocks.result_block import ResultBlock
 from modules.site.layout_generator import LayoutGenerator
-
 
 class Geometry1Handler(tornado.web.RequestHandler, ABC):
     def get(self):
@@ -39,55 +39,35 @@ class Geometry1Handler(tornado.web.RequestHandler, ABC):
 
         self.write(block.render())
 
-        # TODO: finish
+        # ***
 
-        # trapezoid_lists = []
-        #
-        # for i in range(1, 10):
-        #     temp_list = []
-        #     for i2 in range(0, 3):
-        #         temp_list.append(randint(0, 1000) * 0.25)
-        #     trapezoid_lists.append(temp_list)
-        #
-        # content = "<table border='1' cellpadding='2'>" \
-        #           "<tr>" \
-        #           "<th>H</th>" \
-        #           "<th>B1</th>" \
-        #           "<th>B2</th>" \
-        #           "<th>Area</th>" \
-        #           "</tr>"
-        # for data in trapezoid_lists:
-        #     content += "<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></tr>".format(
-        #         str(data[0]),
-        #         str(data[1]),
-        #         str(data[2]),
-        #         str(AreasModule.trapezoid_area(data[0], data[1], data[2])))
-        # content += "</table>"
-        # self.write(content)
-        #
-        # self.write(LayoutGenerator.gen_title("Cylinder surface area"))
-        #
-        # cylinders_list = []
-        #
-        # for i in range(1, 10):
-        #     temp_list = []
-        #     for i2 in range(0, 2):
-        #         temp_list.append(randint(0, 1000) * 0.25)
-        #     cylinders_list.append(temp_list)
-        #
-        # content = "<table border='1' cellpadding='2'>" \
-        #           "<tr>" \
-        #           "<th>R</th>" \
-        #           "<th>H</th>" \
-        #           "<th>Total surface area</th>" \
-        #           "</tr>"
-        #
-        # for data in cylinders_list:
-        #     content += "<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>".format(
-        #         str(data[0]),
-        #         str(data[1]),
-        #         str(AreasModule.cylinder_surface_area(data[0], data[1])))
-        # content += "</table>"
-        # self.write(content)
-        #
-        # self.write("</center>")
+        block = ResultBlock()
+        block.title = "Trapezoid area"
+        block.table_columns = ["H", "B1", "B2", "Area"]
+
+        for i in range(1, 10):
+            temp_list = []
+            for i2 in range(0, 4):
+                temp_list.append(randint(0, 1000) * 0.25)
+            temp_list[3] = AreasModule.trapezoid_area(temp_list[0], temp_list[1], temp_list[2])
+
+            block.table_data.append(temp_list)
+
+        self.write(block.render())
+
+        # ***
+
+        block = ResultBlock()
+        block.title = "Cylinder total surface area and volume"
+        block.table_columns = ["R", "H", "Total surface area", "Volume"]
+
+        for i in range(1, 10):
+            temp_list = []
+            for i2 in range(0, 4):
+                temp_list.append(randint(0, 400) * 0.25)
+            temp_list[2] = AreasModule.cylinder_surface_area(temp_list[0], temp_list[1])
+            temp_list[3] = VolumesModule.cylinder_volume(temp_list[0], temp_list[1])
+
+            block.table_data.append(temp_list)
+
+        self.write(block.render())
