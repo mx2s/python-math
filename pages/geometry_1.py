@@ -2,8 +2,8 @@ from abc import ABC
 from random import randint
 import tornado.web
 
-from modules.volumes.volumes_module import VolumesModule
-from modules.areas.areas_module import AreasModule
+from modules.geometry.volumes_module import VolumesModule
+from modules.geometry.areas_module import AreasModule
 from modules.geometry.degrees_module import DegreesModule
 from modules.site.blocks.result_block import ResultBlock
 from modules.site.layout_generator import LayoutGenerator
@@ -60,6 +60,23 @@ class Geometry1Handler(tornado.web.RequestHandler, ABC):
         block = ResultBlock()
         block.title = "Cylinder total surface area and volume"
         block.table_columns = ["R", "H", "Total surface area", "Volume"]
+
+        for i in range(1, 10):
+            temp_list = []
+            for i2 in range(0, 4):
+                temp_list.append(randint(0, 400) * 0.25)
+            temp_list[2] = AreasModule.cylinder_surface_area(temp_list[0], temp_list[1])
+            temp_list[3] = VolumesModule.cylinder_volume(temp_list[0], temp_list[1])
+
+            block.table_data.append(temp_list)
+
+        self.write(block.render())
+
+        # ***
+
+        block = ResultBlock()
+        block.title = "Sphere total surface area and volume"
+        block.table_columns = ["R", "H", "Surface area", "Volume"]
 
         for i in range(1, 10):
             temp_list = []
