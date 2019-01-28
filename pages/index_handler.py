@@ -10,6 +10,9 @@ class IndexHandler(tornado.web.RequestHandler, ABC):
             {"name": "Geometry 1", "uri": "/geometry_1", "tasks": [
                 "degrees to radians converter",
                 "radians to degrees converter"
+                "trapezoid area",
+                "cylinder total surface area and volume",
+                "sphere total surface area and volume"
             ]}
         ]
 
