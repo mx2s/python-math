@@ -9,3 +9,7 @@ class AreasModule:
     @staticmethod
     def cylinder_surface_area(r: float, h: float):
         return (2 * math.pi * r * h) + (2 * math.pi * (r * r))
+
+    @staticmethod
+    def sphere_surface_area(r: float, h: float):
+        return (4 * math.pi * r * h) + (2 * math.pi * (r * r))

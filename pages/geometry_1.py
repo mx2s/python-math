@@ -8,6 +8,7 @@ from modules.geometry.degrees_module import DegreesModule
 from modules.site.blocks.result_block import ResultBlock
 from modules.site.layout_generator import LayoutGenerator
 
+
 class Geometry1Handler(tornado.web.RequestHandler, ABC):
     def get(self):
         self.write(LayoutGenerator.gen_header())
